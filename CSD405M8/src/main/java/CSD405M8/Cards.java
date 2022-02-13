@@ -1,88 +1,83 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This code will generate an array called deck with 54 elements.  Then will collect card from sub directory
+ *    and display it along with labels for each card and stage title. 
  */
 package CSD405M8;
 
-/**
- *
- * @author wit0011153
- */
-import javafx.application.Application;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+// Imports
+import java.io.FileInputStream;  
+  
+import javafx.application.Application;  
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.lang.Math;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;  
+import javafx.scene.control.Label;  
+import javafx.scene.image.Image;  
+import javafx.scene.image.ImageView;  
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Label;
-
-public class Cards extends Application {
-    public static void main(String [] args){
-        launch(args);
-    }
-
-    @Override // override start
-    public void start(Stage primaryStage) throws FileNotFoundException{
-        
-        //create the card deck
+import javafx.stage.Stage;  
+  
+public class Cards extends Application {  
+  
+    
+    @Override  
+    public void start(Stage primaryStage) throws Exception {  
+        // TODO Auto-generated method stub  
+          
+        // Create an array of 54 named deck
         int[] deck = new int[54];
         for(int i=0; i<54; i++) {
             deck[i] = i+1;
         }
-
-        //get four random numbers to pick cards
-        int cardNumber = deck[(int)(Math.random() * 54 + 1)];
-        int cardNumberTwo = deck[(int)(Math.random() * 54 + 1)];
-        int cardNumberThree = deck[(int)(Math.random() * 54 + 1)];
-        int cardNumberFour = deck[(int)(Math.random() * 54 + 1)];
-
-        //path to cards
-        //X:\College\Bellevue\Intermediate Java\Module 8\cards
         
-        Image imageOne = new Image(new FileInputStream("file:CSD405M8.cards\\" + cardNumber + ".png"));
-        Image imageTwo = new Image(new FileInputStream("cards\\" + cardNumberTwo + ".png"));
-        Image imageThree = new Image(new FileInputStream("cards\\" + cardNumberThree + ".png"));
-        Image imageFour = new Image(new FileInputStream("cards\\" + cardNumberFour + ".png"));
+        // Create 4 random car index numbers
+        int card1 = deck[(int)(Math.random()* 54 + 1)];
+        int card2 = deck[(int)(Math.random()* 54 + 1)];
+        int card3 = deck[(int)(Math.random()* 54 + 1)];
+        int card4 = deck[(int)(Math.random()* 54 + 1)];
 
-        //create the ImageViews
-        ImageView viewOne = new ImageView();
-        viewOne.setImage(imageOne);
-        ImageView viewTwo = new ImageView();
-        viewTwo.setImage(imageTwo);
-        ImageView viewThree = new ImageView();
-        viewThree.setImage(imageThree);
-        ImageView viewFour = new ImageView();
-        viewFour.setImage(imageFour);
-
-        //create strings for labels
-        Label one = new Label("Card One");
-        Label two = new Label("Card Two");
-        Label three = new Label("Card Three");
-        Label four = new Label("Card Four");
-
-        //create a gridpane to hold the four cards
+        // Accessing cards in sub directory and assigning to array elements of deck
+        
+        Image img1 = new Image(new FileInputStream("C:\\NetBeansProjects\\csd-405\\CSD405M8\\src\\main\\java\\CSD405M8\\cards\\" + card1 + ".png"));
+        Image img2 = new Image(new FileInputStream("C:\\NetBeansProjects\\csd-405\\CSD405M8\\src\\main\\java\\CSD405M8\\cards\\" + card2 + ".png"));
+        Image img3 = new Image(new FileInputStream("C:\\NetBeansProjects\\csd-405\\CSD405M8\\src\\main\\java\\CSD405M8\\cards\\" + card3 + ".png"));
+        Image img4 = new Image(new FileInputStream("C:\\NetBeansProjects\\csd-405\\CSD405M8\\src\\main\\java\\CSD405M8\\cards\\" + card4 + ".png"));
+        ImageView img1View = new ImageView();
+        img1View.setImage(img1);
+        ImageView img2View = new ImageView();
+        img2View.setImage(img2);
+        ImageView img3View = new ImageView();
+        img3View.setImage(img3);
+        ImageView img4View = new ImageView();
+        img4View.setImage(img4);
+        
+        // Creating GridPane labels 
+        Label Lb1 =new Label("Card#1"); 
+        Label Lb2 =new Label("Card#2"); 
+        Label Lb3 =new Label("Card#3"); 
+        Label Lb4 =new Label("Card#4");
+        
+        // Creating GridPane, centering it and setting V,H and padding dimensions
         GridPane root = new GridPane();
-        root.setHgap(5);
-        root.setVgap(5);
-        root.setPadding(new Insets(5,5,5,5));
-
-        //create the scene
-        Scene scene = new Scene(root);
-
-        //add the images to the gridpane
-        root.addRow(0, one, two);
-        root.addRow(1, viewOne, viewTwo);
-        root.addRow(2, three, four);
-        root.addRow(3, viewThree, viewFour);
-
-        //set scene to the stage
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-    }
-}
+        root.setAlignment(Pos.CENTER);
+        root.setHgap(20);
+        root.setVgap(20);
+        root.setPadding(new Insets(10,10,10,10));
+        
+        // Creating scene
+        Scene scene=new Scene(root); 
+        
+        // Filling up the grid and giving the stage a title
+        root.addRow(0,Lb1, Lb2);
+        root.addRow(1, img1View, img2View);
+        root.addRow(2,Lb3, Lb4);
+        root.addRow(3, img3View, img4View);
+        primaryStage.setScene(scene);  
+        primaryStage.setTitle("Four Random Cards");  
+        primaryStage.show();  
+          
+    }  
+    public static void main(String[] args) {  
+        launch(args);  
+    }  
+} 
